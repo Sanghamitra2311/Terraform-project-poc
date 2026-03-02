@@ -45,9 +45,10 @@ resource "google_compute_instance" "my_vms" {
   zone         = var.zone
 
   scheduling {
-    provisioning_model = "SPOT"
-    preemptible        = true
-    automatic_restart  = false
+    provisioning_model          = "SPOT"
+    preemptible                 = true
+    automatic_restart           = false
+    instance_termination_action = "DELETE" # Tells GCP to delete, not just stop
 
     #Google Cloud recently introduced a feature specifically for this that handles the cleanup slightly better than a startup script. You can tell GCP to physically delete the VM after a certain amount of time using the max_run_duration block:
 
